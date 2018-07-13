@@ -8,6 +8,14 @@ from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas
 from reportlab.graphics import renderPDF
 
+suites = ["D", "S", "H", "C"]
+numbers = ["7", "8", "Q", "K", "10", "A", "9", "J"]
+
+cardnames = [""]
+
+for s in suites:
+  for n in numbers:
+      cardnames.append(s + n)
 
 def createBarCodes():
     """
@@ -17,7 +25,9 @@ def createBarCodes():
 
 
     # draw a QR code
-    for i in range(0, 32):
+    for i in range(1, 32+1):
+        c.drawString(100, 100, 'Card ' + cardnames[i])
+
         qr_code = qr.QrCodeWidget(str(i), barLevel='H')
 
         bounds = qr_code.getBounds()
